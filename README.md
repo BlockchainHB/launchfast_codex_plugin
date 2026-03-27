@@ -52,7 +52,9 @@ This plugin is intentionally wired to the production LaunchFast MCP server:
 }
 ```
 
-Authentication happens through LaunchFast. The production endpoint supports OAuth, and LaunchFast dashboard users can also manage MCP/API credentials through LaunchFast settings.
+Authentication happens through LaunchFast using Codex's MCP OAuth flow against the remote LaunchFast MCP server. Codex manages the OAuth client flow and may open a localhost or `127.0.0.1` loopback callback such as `http://127.0.0.1:<ephemeral-port>/callback` during authorization.
+
+Do not manually replace that callback URL with a LaunchFast domain URL. The loopback callback is expected for the local Codex client.
 
 ## Installation
 
@@ -63,6 +65,17 @@ https://github.com/BlockchainHB/launchfast_codex_plugin
 ```
 
 Codex should detect the marketplace entry in `.agents/plugins/marketplace.json` and install the `launchfast` plugin from `plugins/launchfast`.
+
+The marketplace entry uses install-time auth:
+
+```json
+{
+  "policy": {
+    "installation": "AVAILABLE",
+    "authentication": "ON_INSTALL"
+  }
+}
+```
 
 ## Repository Layout
 
@@ -84,4 +97,6 @@ Codex should detect the marketplace entry in `.agents/plugins/marketplace.json` 
 
 - This repository is a plugin marketplace repo, not the LaunchFast application codebase.
 - The MCP implementation itself lives in the LaunchFast app and is consumed here as a remote production service.
+- The plugin points directly at the remote LaunchFast MCP server at `https://launchfastlegacyx.com/api/mcp/server`; it does not use a local shell wrapper.
+- Codex owns the OAuth redirect flow for this plugin. Loopback localhost or `127.0.0.1` callbacks are expected and should not be rewritten.
 - Skill outputs default to local artifact paths under `./artifacts/launchfast/...` so the plugin can be used without modifying the repository itself.
