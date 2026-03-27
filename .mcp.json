@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "launchfast": {
+      "type": "http",
+      "url": "https://launchfastlegacyx.com/api/mcp/server",
+      "note": "LaunchFast MCP server for Amazon product research. Supports OAuth via the LaunchFast protected-resource metadata and authorization endpoints. On first install, authenticate with your LaunchFast account. API-key auth is also available from the LaunchFast dashboard settings page if you prefer manual credentials."
+    }
+  }
+}
