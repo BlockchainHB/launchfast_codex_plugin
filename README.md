@@ -1,19 +1,21 @@
 # LaunchFast Codex Plugin
 
-LaunchFast for Codex is a standalone plugin bundle for Amazon FBA research workflows. It connects Codex to the production LaunchFast MCP server and includes reusable skills for product research, PPC planning, supplier sourcing, and full opportunity reviews.
+LaunchFast for Codex is a Codex plugin marketplace repository for Amazon FBA research workflows. It exposes the `launchfast` plugin through the GitHub-installable marketplace layout that Codex expects, and the plugin itself connects Codex to the production LaunchFast MCP server with bundled skills for product research, PPC planning, supplier sourcing, and full opportunity reviews.
 
 - Website: [launchfastlegacyx.com](https://launchfastlegacyx.com)
 - Docs: [docs.launchfastlegacyx.com/mcp](https://docs.launchfastlegacyx.com/mcp)
 
 ## What’s Included
 
-- `.codex-plugin/plugin.json`
-  The Codex plugin manifest.
-- `.mcp.json`
+- `.agents/plugins/marketplace.json`
+  Marketplace metadata so Codex can discover and install the plugin from this GitHub repository.
+- `plugins/launchfast/.codex-plugin/plugin.json`
+  The LaunchFast plugin manifest.
+- `plugins/launchfast/.mcp.json`
   The MCP server definition pointing at the production LaunchFast endpoint.
-- `skills/`
+- `plugins/launchfast/skills/`
   Bundled Codex-native workflows for Amazon seller research.
-- `assets/`
+- `plugins/launchfast/assets/`
   Plugin icon, logo, and screenshots.
 
 ## Bundled Skills
@@ -52,19 +54,34 @@ This plugin is intentionally wired to the production LaunchFast MCP server:
 
 Authentication happens through LaunchFast. The production endpoint supports OAuth, and LaunchFast dashboard users can also manage MCP/API credentials through LaunchFast settings.
 
+## Installation
+
+Use the repository URL in Codex:
+
+```text
+https://github.com/BlockchainHB/launchfast_codex_plugin
+```
+
+Codex should detect the marketplace entry in `.agents/plugins/marketplace.json` and install the `launchfast` plugin from `plugins/launchfast`.
+
 ## Repository Layout
 
 ```text
 .
-├── .codex-plugin/
-│   └── plugin.json
-├── .mcp.json
-├── assets/
-└── skills/
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json
+└── plugins/
+    └── launchfast/
+        ├── .codex-plugin/
+        │   └── plugin.json
+        ├── .mcp.json
+        ├── assets/
+        └── skills/
 ```
 
 ## Notes
 
-- This repository is the plugin distribution, not the LaunchFast application codebase.
+- This repository is a plugin marketplace repo, not the LaunchFast application codebase.
 - The MCP implementation itself lives in the LaunchFast app and is consumed here as a remote production service.
 - Skill outputs default to local artifact paths under `./artifacts/launchfast/...` so the plugin can be used without modifying the repository itself.

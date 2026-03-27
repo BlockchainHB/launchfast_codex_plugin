@@ -1,0 +1,20 @@
+{
+  "name": "launchfast",
+  "interface": {
+    "displayName": "LaunchFast"
+  },
+  "plugins": [
+    {
+      "name": "launchfast",
+      "source": {
+        "source": "local",
+        "path": "./plugins/launchfast"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
