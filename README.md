@@ -46,13 +46,30 @@ This plugin is intentionally wired to the production LaunchFast MCP server:
   "mcpServers": {
     "launchfast": {
       "type": "http",
-      "url": "https://launchfastlegacyx.com/api/mcp/server"
+      "url": "https://launchfastlegacyx.com/api/mcp/server",
+      "oauth_resource": "https://launchfastlegacyx.com/api/mcp/server",
+      "scopes": [
+        "launchfast:read",
+        "launchfast:write",
+        "launchfast:amazon:seller:sales:read",
+        "launchfast:amazon:seller:inventory:read",
+        "launchfast:amazon:seller:finance:read",
+        "launchfast:amazon:seller:brand-query:read",
+        "launchfast:amazon:seller:brand-search-terms:read",
+        "launchfast:amazon:seller:brand-catalog:read",
+        "launchfast:amazon:ads:product-performance:read",
+        "launchfast:amazon:ads:targeting:read",
+        "launchfast:amazon:ads:search-terms:read",
+        "launchfast:amazon:ads:campaigns:read",
+        "launchfast:amazon:ads:entity-graph:read",
+        "launchfast:amazon:ads:diagnostics:read"
+      ]
     }
   }
 }
 ```
 
-Authentication happens through LaunchFast using Codex's MCP OAuth flow against the remote LaunchFast MCP server. Codex manages the OAuth client flow and may open a localhost or `127.0.0.1` loopback callback such as `http://127.0.0.1:<ephemeral-port>/callback` during authorization.
+Authentication happens through LaunchFast using Codex's MCP OAuth flow against the remote LaunchFast MCP server. The plugin declares the full production scope set so a new connection can consent to LaunchFast research plus read-only Amazon Seller, Brand Analytics, and Ads tools. Codex manages the OAuth client flow and may open a localhost or `127.0.0.1` loopback callback such as `http://127.0.0.1:<ephemeral-port>/callback` during authorization.
 
 Do not manually replace that callback URL with a LaunchFast domain URL. The loopback callback is expected for the local Codex client.
 
